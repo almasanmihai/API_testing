@@ -52,3 +52,8 @@ class TestBooks:
         }
         assert get_book(1).status_code == 200, 'status code not ok'
         assert book == expected, 'book data is not ok'
+
+    def test_get_book_invalid(self):
+        book = get_book(50)
+        assert book.status_code == 404, 'status code not ok'
+        assert book.json()['error'] == "No book with id 50", 'error wrong'
